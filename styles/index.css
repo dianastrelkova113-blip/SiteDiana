@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    color: #4a5565;
+}
+
+html, body{
+    font-size: 24px;
+    background-color: #f5f7fa;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem 0;
+    gap: 2rem;
+}
+
+.promo{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    max-width: 30rem;
+}
+
+.promo span{
+    font-size: 1.25rem;
+}
+
+.levels-cards{
+    display: flex;
+    gap: 2rem;
+}
+
+.level-card{
+    width: 15rem;
+    background-color: white;
+    border-left: .25rem solid var(--color);
+    border-radius: .5rem;
+    padding: 1.5rem;
+    box-shadow: 0 .25rem .5rem .25rem #00000011;
+    transition: .3s;
+    
+}
+
+.level-card:hover{
+    transform: translateY(-.5rem);
+    box-shadow: 0 .25rem .5rem .25rem #00000022;
+}
+
+.level-card a{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+}
+
+.level-card h2{
+    background-color: var(--color);
+    padding: .25rem .5rem;
+    border-radius: .5rem;
+    color: white;
+}
+
+.level-card span{
+    font-weight: bold;
+}
+
+.level-card p{
+    font-size: .75rem;
+    color: #666;
+}
+
+.level-card span.level-btn{
+    font-weight: normal;
+    color: var(--color);
+    font-size: .75rem;
+}
+
+.about-project{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 40rem;
+    text-align: center;
+    background-color: white;
+    padding: 2rem;
+    border-radius: .5rem;
+    text-align: start;
+    box-shadow: 0 .1rem .1rem .1rem #00000011;
+}
+
+.about-project p{
+    line-height: 1.75;
+}
+
+.about-project ul li{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.about-project ul li b{
+    color: var(--color);
+}
+
+.about-project ul li span{
+    font-weight: bold;
+}
