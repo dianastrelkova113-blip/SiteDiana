@@ -83,6 +83,7 @@ let testTheory = document.getElementById("test-theory");
 let testExample = document.getElementById("test-example");
 let testExampleContainer = document.getElementById("test-example-container");
 let testQuestions = document.getElementById("test-questions");
+let buttonNext = document.getElementById("button-next");
 let body = document.body;
 
 
@@ -152,11 +153,7 @@ const initTest = (section) =>{
         //Кнопка проверить
         let buttonCheck = document.createElement("button");
         buttonCheck.textContent = "Проверить";
-        buttonCheck.onclick = (e) =>{
-            confetti({
-                position: { x: e.clientX, y: e.clientY }
-            });
-        }
+        
         buttonCheck.disabled = true;
         buttonsLayout.appendChild(buttonCheck);
 
@@ -206,6 +203,59 @@ const initTest = (section) =>{
                 optionsList.appendChild(optionItem);
             }
             testItem.appendChild(optionsList);
+            buttonCheck.onclick = (e) =>{
+                if(testDataItem.userAnswer == section.tests[i].answer){
+                    confetti({
+                        position: { x: e.clientX, y: e.clientY }
+                    });
+                    hint.classList.add("correct");
+                    hint.textContent = "✓ Правильно!";
+                    buttonCheck.style.display = "none";
+                    buttonhint.style.display = "none";
+                    testDataItem.options.forEach(option => {
+                        option.disabled = true;
+                        if(option.checked){
+                            option.parentElement.classList.add("correct");
+                        }
+                    });
+                }
+                else{
+                    hint.classList.add("wrong");
+                    hint.textContent = "✗ Неправильно! Поробуй ещё раз.";
+                    buttonCheck.disabled = true;
+                    buttonhint.style.display = "none";
+                    testDataItem.options.forEach(option => {
+                        option.disabled = true;
+                        if(option.checked){
+                            option.parentElement.classList.add("wrong");
+                        }
+                    });
+                    let x = 100;
+                    let interval = setInterval(() => {
+                        hint.style.cssText = `--x: ${x}%;`
+                        x = x - 2;
+                    }, 100);
+                    setTimeout(() => {
+                        x = 100;
+                        clearInterval(interval);
+                        hint.classList.remove("wrong");
+                        buttonCheck.textContent = "Проверить"
+                        buttonhint.style.display = "block";
+                        testDataItem.options.forEach(option => {
+                            option.disabled = false;
+                            if(option.checked){
+                                option.parentElement.classList.remove("wrong");
+                            }
+                            option.checked = false;
+                        });
+                        hint.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fec800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb w-5 h-5 text-yellow-600 flex-shrink-0 mt-1" data-fg-czc624="6.16:6.5972:/src/app/components/exercises/MultipleChoice.tsx:107:13:3505:68:e:Lightbulb::::::DclZ" data-fgid-czc624=":r12j:"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+                        
+                        ${section.tests[i].hint}`;
+                    }, 5000);
+                }
+                
+            }
         }
         //Ответ письменный
         else{
@@ -213,6 +263,54 @@ const initTest = (section) =>{
             input.type = "text";
             input.placeholder = "Введите ответ";
             testDataItem.options.push(input)
+            testItem.appendChild(input);
+            
+            input.oninput = () => {
+                testDataItem.userAnswer = input.value;
+                buttonCheck.disabled = input.value.length == 0;
+            }
+            buttonCheck.onclick = (e) =>{
+                if(testDataItem.userAnswer.toLowerCase() == section.tests[i].answer.toLowerCase()){
+                    confetti({
+                        position: { x: e.clientX, y: e.clientY }
+                    });
+                    hint.classList.add("correct");
+                    hint.textContent = "✓ Правильно!";
+                    buttonCheck.style.display = "none";
+                    buttonhint.style.display = "none";
+                    input.classList.add("correct");
+                    input.disabled = true;
+                }
+                else{
+                    hint.classList.add("wrong");
+                    hint.textContent = "✗ Неправильно! Поробуй ещё раз.";
+                    buttonCheck.disabled = true;
+                    buttonhint.style.display = "none";
+                    input.classList.add("wrong");
+                    input.disabled = true;
+                    let x = 100;
+                    let interval = setInterval(() => {
+                        hint.style.cssText = `--x: ${x}%;`
+                        x = x - 2;
+                    }, 100);
+                    setTimeout(() => {
+                        x = 100;
+                        clearInterval(interval);
+                        hint.classList.remove("wrong");
+                        buttonCheck.textContent = "Проверить"
+                        buttonhint.style.display = "block";
+                        input.classList.remove("wrong");
+                        input.value = "";
+                        input.disabled = false;
+                        hint.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fec800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb w-5 h-5 text-yellow-600 flex-shrink-0 mt-1" data-fg-czc624="6.16:6.5972:/src/app/components/exercises/MultipleChoice.tsx:107:13:3505:68:e:Lightbulb::::::DclZ" data-fgid-czc624=":r12j:"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+                        
+                        ${section.tests[i].hint}`;
+                    }, 5000);
+                }
+
+                
+            }
 
         }
 
@@ -221,6 +319,7 @@ const initTest = (section) =>{
         hint.classList.add("hint");
         hint.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fec800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb w-5 h-5 text-yellow-600 flex-shrink-0 mt-1" data-fg-czc624="6.16:6.5972:/src/app/components/exercises/MultipleChoice.tsx:107:13:3505:68:e:Lightbulb::::::DclZ" data-fgid-czc624=":r12j:"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>
+        
         ${section.tests[i].hint}`;
         testItem.appendChild(hint);
 
@@ -263,5 +362,14 @@ testHeaderTheory.onClick = () => {};
 
 initTest(TEST.Sections[0]);
 
-
+nextSection = () => {
+    if(selectedSection < TEST.Sections.length - 1){
+        selectedSection++;
+        initTest(TEST.Sections[selectedSection]);
+    }
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 

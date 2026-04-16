@@ -213,6 +213,49 @@ aside #section-list .section-item.selected button{
 
 }
 
+.test-item .options-list li label.correct{
+    border-color: #10b981;
+    border-width: 3px;
+    color: #10b981;
+    background-color: #d1fae5;
+}
+
+.test-item .options-list li label.wrong{
+    border-color: #b91010;
+    border-width: 3px;
+    color: #b91010;
+    background-color: #fde2e2;
+}
+
+.test-item input[type="text"] {
+    padding: .5rem;
+    border: 2px solid #e2e8f0;
+    border-radius: .5rem;
+    transition: .3s;
+    width: 100%;
+    cursor: pointer;
+    font-size: 1rem;
+    outline: none;
+}
+
+.test-item input[type="text"].correct,
+.test-item input[type="text"]:not(:placeholder-shown).correct,
+.test-item input[type="text"]:focus.correct{
+    border-color: #10b981;
+    border-width: 3px;
+    color: #10b981;
+    background-color: #d1fae5;
+}
+
+.test-item input[type="text"].wrong,
+.test-item input[type="text"]:not(:placeholder-shown).wrong,
+.test-item input[type="text"]:focus.wrong{
+    border-color: #b91010;
+    border-width: 3px;
+    color: #b91010;
+    background-color: #fde2e2;
+}
+
 input[type="radio"] {
   /* Увеличение размера */
   transform: scale(1.5);
@@ -221,6 +264,25 @@ input[type="radio"] {
   cursor: pointer;
   margin: 10px;
 }
+
+label:has(input[type="radio"]:checked){
+
+    border-color: var(--bg-color);
+    border-width: 3px;
+}
+
+.test-item input[type="text"]:not(:placeholder-shown) {
+    border-color: var(--bg-color);
+    border-width: 2px;
+}
+
+.test-item input[type="text"]:focus{
+
+    border-color: var(--bg-color);
+    border-width: 3px;
+}
+
+
 
 .test-item .hint{
     display: none;
@@ -238,6 +300,35 @@ input[type="radio"] {
 .test-item .hint.show{
     display: flex;
 }
+
+.test-item .hint.correct{
+    display: flex;
+    color: #10b981;
+    background-color: #d1fae5;
+    border-color: #10b981;
+}
+
+.test-item .hint.wrong{
+    display: flex;
+    position: relative;
+    color: #b91010;
+    background-color: #fde2e2;
+    border-color: #b91010;
+    overflow: hidden;
+    
+}
+
+.test-item .hint.wrong::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: var(--x);
+    height: .25rem;
+    background-color: #b91010;
+    transition: .1s;
+}
+
 .test-item .buttons-layout{
     display: flex;
     gap: .5rem;
@@ -271,4 +362,19 @@ input[type="radio"] {
     background-color: transparent;
     color: var(--bg-color);
     border: 2px solid var(--bg-color);
+}
+
+.button-next{
+    background-color: var(--bg-color);
+    color: white;
+    border: none;
+    padding: .75rem 1.5rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-top: 2rem;
+    cursor: pointer;
+    align-self: flex-end;
 }
