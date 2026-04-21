@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="--font-size: 22px;">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,9 +37,23 @@
                 <h2>Задания для самопроверки</h2>
                 <ul id="test-questions"></ul>
                 <div class="separator l"></div>
-                <button class="button-next" onclick="nextSection()">Следующий раздел</button>
+                <button id="button-next" onclick="nextSection()">Следующий раздел</button>
             </div>
         </main>
+         <div id="popup">
+                <div id="popup-theory">
+                    <div id="popup-header">
+                            <h2 id="popup-title">Теория</h2>
+                            <button id="popup-close">Закрыть</button>
+                    </div>
+                    <div id="popup-body">
+                        <ul id="popup-aside"></ul>
+                        <div id="popup-container">
+                            <div id="popup-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <script src="https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js"></script>
         <script src="./scripts/index-hard.js"></script>
     </body>
