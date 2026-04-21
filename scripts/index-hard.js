@@ -456,6 +456,7 @@ let popupAside = document.getElementById("popup-aside");
 
 //Проверка ответов и переход к следующему разделу
 let nextSection = (e) => {
+    
     if(!isNextSection){
         let allCorrect = true;
         testData.forEach((test, index) => {
@@ -579,6 +580,7 @@ let nextSection = (e) => {
 }
 
 const initTest = (section) =>{
+    testData = [];
     buttonNext.style.transform = "scale(1)";
     testHeader.innerHTML = ``
     testTheory.innerHTML = ``
