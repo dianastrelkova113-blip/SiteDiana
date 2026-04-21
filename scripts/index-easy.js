@@ -1,5 +1,5 @@
 const TEST = {
-    title: "1-й уровень — Базовый",
+    title: "1-й уровень — Подготовительный",
     "color" : "#81b29a",
     Sections: [
         {
@@ -415,6 +415,30 @@ THEORY = [
     }
 ]
 
+let nextSection = (e) => {
+    console.log(e.target);
+    
+    if(selectedSection < TEST.Sections.length - 1){
+        selectedSection++;
+        initTest(TEST.Sections[selectedSection]);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+    else{
+        // let positionList = [
+        //     { x: window.innerWidth * 0.50, y: window.innerHeight * 0.60 },
+        //     { x: window.innerWidth * 0.25, y: window.innerHeight * 0.40 },
+        //     { x: window.innerWidth * 0.75, y: window.innerHeight * 0.30 },
+        // ];
+        // for(let i = 0; i < positionList.length; i++) {
+        //     setTimeout(() => confetti({ position: positionList[i] }), i * 250);
+        // }
+    }
+    
+}
+
 let testData = [];
 let selectedSection = 0;
 let selectedPopupSection = 0;
@@ -440,7 +464,7 @@ let popupAside = document.getElementById("popup-aside");
 
 
 const initTest = (section) =>{
-
+    testData = [];
     testHeader.innerHTML = ``
     testTheory.innerHTML = ``
     testExample.innerHTML = ``
@@ -510,19 +534,19 @@ const initTest = (section) =>{
         buttonsLayout.appendChild(buttonCheck);
 
         //Кнопка подсказка
-        let buttonhint = document.createElement("button");
-        buttonhint.textContent = "Показать подсказку";
-        buttonhint.onclick = () => {
-            if(!hint.classList.contains("show")){
-                hint.classList.add("show")
-                buttonhint.textContent = "Скрыть подсказку";
-            }
-            else{
-                hint.classList.remove("show")
-                buttonhint.textContent = "Показать подсказку";
-            }
-        }
-        buttonsLayout.appendChild(buttonhint);
+        // let buttonhint = document.createElement("button");
+        // buttonhint.textContent = "Показать подсказку";
+        // buttonhint.onclick = () => {
+        //     if(!hint.classList.contains("show")){
+        //         hint.classList.add("show")
+        //         buttonhint.textContent = "Скрыть подсказку";
+        //     }
+        //     else{
+        //         hint.classList.remove("show")
+        //         buttonhint.textContent = "Показать подсказку";
+        //     }
+        // }
+        // buttonsLayout.appendChild(buttonhint);
 
         //Кнопка теория
         let buttonTheory = document.createElement("button");
@@ -846,24 +870,5 @@ testHeaderTheory.onclick = (e) => {
 
 initTest(TEST.Sections[0]);
 
-nextSection = (e) => {
-    if(selectedSection < TEST.Sections.length - 1){
-        selectedSection++;
-        initTest(TEST.Sections[selectedSection]);
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    }
-    else{
-        // let positionList = [
-        //     { x: window.innerWidth * 0.50, y: window.innerHeight * 0.60 },
-        //     { x: window.innerWidth * 0.25, y: window.innerHeight * 0.40 },
-        //     { x: window.innerWidth * 0.75, y: window.innerHeight * 0.30 },
-        // ];
-        // for(let i = 0; i < positionList.length; i++) {
-        //     setTimeout(() => confetti({ position: positionList[i] }), i * 250);
-        // }
-    }
-    
-}
+
+
