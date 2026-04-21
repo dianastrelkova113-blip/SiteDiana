@@ -570,11 +570,14 @@ let nextSection = (e) => {
     else{
         window.location.href = "/index.html";
     }
-    isNextSection = false;
+    
     
 }
 
 const initTest = (section) =>{
+    testData = [];
+    isNextSection = false;
+    buttonNext.textContent = "Проверить";
     buttonNext.style.transform = "scale(1)";
     testHeader.innerHTML = ``
     testTheory.innerHTML = ``
