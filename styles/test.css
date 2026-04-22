@@ -540,7 +540,6 @@ label:has(input[type="radio"]:checked){
 }
 
 #popup #popup-theory #popup-body #popup-container #popup-content .enumiration-container ul .enumiration-subtitle{
-    padding-left: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -554,8 +553,7 @@ label:has(input[type="radio"]:checked){
 }
 
 #popup #popup-theory #popup-body #popup-container #popup-content .enumiration-container ul .enumiration-subtitle li{
-    list-style: circle;
-    margin-left: 1rem;
+    padding-left: 1rem;
 }
 
 #popup-close{
