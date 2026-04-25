@@ -676,14 +676,17 @@ const initTest = (section) =>{
                 buttonCheck.disabled = input.value.length == 0;
             }
             buttonCheck.onclick = (e) =>{
-                if(testDataItem.userAnswer.toLowerCase() == section.tests[i].answer.toLowerCase()){
+                let normailizedUserAnswer = testDataItem.userAnswer.replace(/\s/g, '').toLowerCase();
+                let normailizedAnswer = section.tests[i].answer.replace(/\s/g, '').toLowerCase();
+                console.log(`${normailizedAnswer} --- ${normailizedUserAnswer}`);
+                
+                if(normailizedUserAnswer == normailizedAnswer){
                     confetti({
                         position: { x: e.clientX, y: e.clientY }
                     });
                     hint.classList.add("correct");
                     hint.textContent = "✓ Правильно!";
                     buttonCheck.style.display = "none";
-                    buttonhint.style.display = "none";
                     input.classList.add("correct");
                     input.disabled = true;
                 }
@@ -691,7 +694,6 @@ const initTest = (section) =>{
                     hint.classList.add("wrong");
                     hint.textContent = "✗ Неправильно! Поробуй ещё раз.";
                     buttonCheck.disabled = true;
-                    buttonhint.style.display = "none";
                     input.classList.add("wrong");
                     input.disabled = true;
                     let x = 100;
@@ -704,7 +706,6 @@ const initTest = (section) =>{
                         clearInterval(interval);
                         hint.classList.remove("wrong");
                         buttonCheck.textContent = "Проверить"
-                        buttonhint.style.display = "block";
                         input.classList.remove("wrong");
                         input.value = "";
                         input.disabled = false;
