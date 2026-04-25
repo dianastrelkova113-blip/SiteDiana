@@ -86,6 +86,10 @@ section{
     gap: 1rem;
 }
 
+.level-card a::after{
+    content: none;
+}
+
 .level-card h2{
     background-color: var(--color);
     padding: .25rem .5rem;
